@@ -1,0 +1,33 @@
+#cloud-config
+package_update: true
+packages:
+  - apache2
+
+write_files:
+  - path: /var/www/html/index.html
+    content: |
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>VM Information</title>
+      </head>
+      <body>
+          <h1>VM Information</h1>
+          <p><strong>My Name:</strong> mtnguyen22</p>
+          <p><strong>VM Region:</strong> <span id="vm-region"></span></p>
+          <p><strong>VM Hostname:</strong> <span id="vm-hostname"></span></p>
+      </body>
+      </html>
+    permissions: '0644'
+
+runcmd:
+  - |
+    # Fetch VM metadata and update index.html
+    VM_REGION=$(curl -H Metadata:true "http://169.254.169.254/metadata/instance/compute/location?api-version=2021-01-01&format=text")
+    VM_HOSTNAME=$(hostname)
+    sed -i "s|<span id=\"vm-region\"></span>|$VM_REGION|g" /var/www/html/index.html
+    sed -i "s|<span id=\"vm-hostname\"></span>|$VM_HOSTNAME|g" /var/www/html/index.html
+  - systemctl enable apache2
+  - systemctl start apache2
