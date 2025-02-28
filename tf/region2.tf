@@ -1,5 +1,5 @@
 resource "azurerm_virtual_network" "r2-vnet" {
-  name                = "mtnguyen22-VNet-R2"
+  name                = var.vnet_r2_name
   resource_group_name = azurerm_resource_group.rg.name
   location            = "northeurope"
   address_space       = ["172.16.123.0/24"]
