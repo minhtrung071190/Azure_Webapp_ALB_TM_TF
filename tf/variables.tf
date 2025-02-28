@@ -2,6 +2,14 @@ variable "rg_name" {
   default = "myRG"
 }
 
+variable "vnet_r1_name" {
+  default = "myVnet1Name"
+}
+
+variable "vnet_r2_name" {
+  default = "myVnet2Name"
+}
+
 variable "var.traffic_manager_name" {
   default = "myTrafficManagerName"
 }
