@@ -1,10 +1,10 @@
 resource "azurerm_resource_group" "rg" {
-  name     = "mtnguyen22-w25-RG"
+  name     = var.rg_name
   location = "canadacentral"
 }
 
 resource "azurerm_virtual_network" "r1-vnet" {
-  name                = "mtnguyen22-VNet-R1"
+  name                = var.vnet_r1_name
   resource_group_name = azurerm_resource_group.rg.name
   location            = "canadacentral"
   address_space       = ["172.16.123.0/24"]
