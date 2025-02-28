@@ -1,17 +1,9 @@
-resource "random_string" "azurerm_traffic_manager_profile_name" {
-  length  = 25
-  upper   = false
-  numeric = false
-  special = false
-}
-
-
 resource "azurerm_traffic_manager_profile" "profile" {
-  name                   = "mtnguyen22"
+  name                   = var.traffic_manager_name
   resource_group_name    = azurerm_resource_group.rg.name
   traffic_routing_method = "Performance"
   dns_config {
-    relative_name = "mtnguyen22"
+    relative_name = var.traffic_manager_name
     ttl           = 30
   }
 
