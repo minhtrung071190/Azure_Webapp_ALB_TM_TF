@@ -1,3 +1,11 @@
+variable "rg_name" {
+  default = "myRG"
+}
+
+variable "var.traffic_manager_name" {
+  default = "myTrafficManagerName"
+}
+
 variable "backend_address_pool_name" {
   default = "myBackendPool"
 }
